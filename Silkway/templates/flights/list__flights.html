@@ -1,0 +1,6 @@
+
+{% for flight in flights %}
+{{ flight.title }}
+{{ flight.text }}
+<img src="{{ flight.img.url }}" alt="">
+{% endfor %}

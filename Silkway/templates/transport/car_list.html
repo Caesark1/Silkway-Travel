@@ -1,0 +1,8 @@
+
+{% for car in Cars %}
+
+    
+    <a href="{{car.get_absolute_url}}">{{ car.title }}</a>
+    <img src="{{car.img.url}}" alt="">
+
+{% endfor %}
