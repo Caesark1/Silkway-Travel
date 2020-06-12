@@ -7,12 +7,13 @@ class TourList(ListView):
     model = Tour
     template_name = "tours/tours_list.html"
     context_object_name = "tours"
-    
+    paginate_by = 1
 
 class TourDetail(DetailView):
     template_name = "tours/tour_detail.html"
     queryset = Tour.objects.all()
     form_class = TourOrderForm
+
     def get_context_data(self, **kwargs):
         context = super(TourDetail, self).get_context_data(**kwargs)
         context['form'] = TourOrderForm()

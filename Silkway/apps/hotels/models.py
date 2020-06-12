@@ -14,7 +14,7 @@ class Country(models.Model):
         return self.title
         
     def get_absolute_url(self):
-        return reverse("country_detail", kwargs={"slug":self.slug})
+        return reverse("region_list", kwargs={"slug":self.slug})
 
     
 
@@ -28,7 +28,7 @@ class Region(models.Model):
         return self.title
     
     def get_absolute_url(self):
-        return reverse("region_detail", kwargs={"slug":self.slug})
+        return reverse("hotel_list", kwargs={"slug":self.slug})
     
 class Hotel(models.Model):
     title = models.CharField(max_length = 100)
@@ -57,6 +57,28 @@ class HotelOrder(models.Model):
 
 
 
+# class ProjectaAnalytics(models.Model):
+#     class Meta:
+#         db_table = "ProjectaAnalytics"
+
+#     # внешний ключ на статью
+#     project = models.ForeignKey(Project, on_delete = models.CASCADE ) 
+
+#     # количество просмотров в эту дату
+#     views = models.IntegerField('Просмотры', default=0) 
+
+#     def str(self):
+#         return self.project.project_name
+# obj, created = ProjectaAnalytics.objects.get_or_create(
+#         defaults={
+#             "project": projects[0],
+#         }, 
+#             project = projects[0],
+#         )
+#     obj.views += 1  # Увелечение счётчика при каждом посещении 
+#     obj.save(update_fields=['views']) #Обнавление поля просмотров
+
+#     views = ProjectaAnalytics.objects.filter(project = projects[0]) #Вывод Кол-во просмотров проекта
 
 
 
