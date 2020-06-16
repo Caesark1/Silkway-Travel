@@ -1,0 +1,154 @@
+{% extends "ext_base.html" %}
+{% block title %}
+  {{ tour.title }}
+{% endblock %}
+{% block content %}
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+            <h1 class="title-single">{{ tour.title }}</h1>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="{% url 'index' %}">Домой</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="{% url 'tour_list' %}">Туры</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                {{ tour.title }}
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/ Intro Single End /-->
+
+  <!--/ Agent Single Star /-->
+  <section class="agent-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="agent-avatar-box">
+                <img src="{{ tour.img.url }}" alt="" class="agent-avatar img-fluid">
+              </div>
+            </div>
+            <div class="col-md-5 section-md-t3">
+              <div class="agent-info-box">
+                <div class="agent-title">
+                  <div class="title-box-d">
+                    <h3 class="title-d">{{ tour.title }}</h3>
+                  </div>
+                </div>
+                <div class="agent-content mb-3">
+                  <p class="content-d color-text-a">
+                    {{ tour.text }}
+                  </p>
+                  <div class="info-agents color-a">
+                    <p>
+                      <strong>Phone: </strong>
+                      <span class="color-text-a"> +54 356 945234 </span>
+                    </p>
+                    <p>
+                      <strong>Mobile: </strong>
+                      <span class="color-text-a"> 999 123 456 789</span>
+                    </p>
+                    <p>
+                      <strong>Email: </strong>
+                      <span class="color-text-a"> agents@example.com</span>
+                    </p>
+                    <p>
+                      <strong>skype: </strong>
+                      <span class="color-text-a"> Margaret.Es</span>
+                    </p>
+                    <p>
+                      <strong>Email: </strong>
+                      <span class="color-text-a"> agents@example.com</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="socials-footer">
+                  <ul class="list-inline">
+                    <li class="list-inline-item">
+                      <a href="#" class="link-one">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a href="#" class="link-one">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a href="#" class="link-one">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a href="#" class="link-one">
+                        <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a href="#" class="link-one">
+                        <i class="fa fa-dribbble" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row section-t3">
+          <div class="col-sm-12">
+            <div class="title-box-d">
+              <h3 class="title-d">Вы можете оставить заявку и наш сотрудник в скором времени с вами свяжется</h3>
+            </div>
+          </div>
+        </div>
+        <form action="{% url 'apply' tour.id %}" class="form-a" method="POST" >
+          {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-12 mb-1">
+                      <div class="form-group">
+                          <input type="text" class = "form-control form-control-lg form-control-a" id="inputfirstname" name="first_name"
+                          placeholder="firstname *" required>
+                      </div>
+                    </div>
+                    <div class="col-md-12 mb-1">
+                      <div class="form-group">
+                        <input type="text" class = "form-control form-control-lg form-control-a" id="inputfirstname" name="last_name"
+                          placeholder="lastname *" required>
+                      </div>
+                    </div>
+                    <div class="col-md-12 mb-1">
+                      <div class="form-group">
+                        <input type="text" class = "form-control form-control-lg form-control-a" id="inputfirstname" name="email"
+                          placeholder="email *" required>
+                      </div>
+                    </div>
+                    <div class="col-md-12 mb-1">
+                      <div class="form-group">
+                        <input type="text" class = "form-control form-control-lg form-control-a" id="inputfirstname" name="phone_number"
+                          placeholder="phone number *" required>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <button type="submit" class="btn btn-a">Send Message</button>
+                    </div>
+                  </div>
+        </form>
+      </div>
+    </div>
+  </section>
+{% endblock %}

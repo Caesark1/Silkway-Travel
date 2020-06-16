@@ -22,7 +22,15 @@ class HotelOrderForm(forms.ModelForm):
         self.fields['phone_number'].widget.attrs={
             'placeholder': 'Введите номер телефона',
             "class": "form-control form-control-lg form-control-a"}
+        
+        self.fields['check_in'].widget.attrs={
+            'placeholder': 'Дата заезда',
+            "class": "form-control form-control-lg form-control-a"}
+        
+        self.fields['check_out'].widget.attrs={
+            'placeholder': 'Дата выезда',
+            "class": "form-control form-control-lg form-control-a"}
 
     class Meta:
         model = HotelOrder
-        fields = ("first_name", "last_name", "email", "phone_number")
+        fields = ("first_name", "last_name", "email", "phone_number", "check_in", "check_out")

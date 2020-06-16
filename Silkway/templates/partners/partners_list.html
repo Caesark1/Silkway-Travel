@@ -1,0 +1,65 @@
+{% extends "ext_base.html" %}
+
+{% block title %}
+  Наши партнеры
+{% endblock %}
+
+{% block content %}
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+            <h1 class="title-single">Наши Партнеры</h1>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="{% url 'index' %}">Home</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Наши Партнеры
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="news-grid grid">
+    <div class="container">
+      <div class="row">
+        {% for partner in partners %}
+        <div class="col-md-4">
+          <div class="card-box-b card-shadow news-box">
+            <div class="img-box-b">
+              <img src="{{ partner.img.url }}" alt="" class="img-b img-fluid">
+            </div>
+            <div class="card-overlay">
+              <div class="card-header-b">
+                <!-- <div class="card-category-b">
+                  <a href="#" class="category-b">Travel</a>
+                </div> -->
+                <!-- <div class="card-title-b">
+                  <h2 class="title-2">
+                    {{ partner.name }}
+                  </h2>
+                </div> -->
+                <!-- <div class="card-date">
+                  <span class="date-b">18 Sep. 2017</span>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

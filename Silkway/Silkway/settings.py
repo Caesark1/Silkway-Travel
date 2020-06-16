@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,7 +44,12 @@ INSTALLED_APPS = [
     'apps.Tours',
     'apps.transport',
     'apps.hotels',
-    'apps.main'
+    'apps.main',
+    'apps.about',
+    'apps.discount',
+    'apps.partners',
+    'apps.contacts',
+    'apps.users',
 ]
 
 MIDDLEWARE = [
@@ -80,18 +86,14 @@ WSGI_APPLICATION = 'Silkway.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "Silkway",
-        'USER': 'postgres',
-        'PASSWORD': 'Skycrow123',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -124,13 +126,64 @@ USE_L10N = True
 
 USE_TZ = True
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+JET_SIDE_MENU_COMPACT = True
+JET_CHANGE_FORM_SIBLING_LINKS = True
+JET_THEMES = [
+{
+'theme': 'default', # theme folder name
+'color': '#47bac1', # color of the theme's button in user menu
+'title': 'Default' # theme title
+},
+{
+'theme': 'green',
+'color': '#44b78b',
+'title': 'Green'
+},
+{
+'theme': 'light-green',
+'color': '#2faa60',
+'title': 'Light Green'
+},
+{
+'theme': 'light-violet',
+'color': '#a464c4','title': 'Light Violet'
+},
+{
+'theme': 'light-blue',
+'color': '#5EADDE',
+'title': 'Light Blue'
+},
+{
+'theme': 'light-gray',
+'color': '#222',
+'title': 'Light Gray'
+}
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# smtp
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "testfordjango1@gmail.com"
+EMAIL_HOST_PASSWORD = "testdjango"
+EMAIL_PORT = 587
+
+# REDIS, CELERY SETTINGS
+REDIS_HOST = "127.0.0.1"
+REDIS_PORT = "6379"
+CELERY_BROKER_URL = "redis://" + REDIS_HOST + ":" + REDIS_PORT + "/0"
+CELERY_BROKER_TRANSPORT_OPTIONS = {"visibility_timeout": 3600}
+CELERY_RESULT_BACKEND = "redis://" + REDIS_HOST + ":" + REDIS_PORT + "/0"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"

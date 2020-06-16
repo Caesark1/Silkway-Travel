@@ -1,0 +1,11 @@
+
+{{ discounts }}
+
+{% for obj in discounts %}
+    {% for hotel in obj.hotel_discount.all %}
+        {{ hotel.title }}
+    {% endfor %}
+    {% for hotel in obj.tour_discount.all %}
+        {{ hotel.title }}
+    {% endfor %}
+{% endfor %}

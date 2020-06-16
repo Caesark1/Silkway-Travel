@@ -2,12 +2,15 @@ from django.db import models
 from django.shortcuts import reverse
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
+from apps.discount.models import Discount
+
 
 class Tour(models.Model):
-    title = models.CharField(max_length = 100)
-    text = models.TextField()
-    img = models.ImageField(upload_to = "MediaTours/")
+    title = models.CharField(max_length = 100, verbose_name = "Название")
+    text = models.TextField(verbose_name = "Описание")
+    img = models.ImageField(upload_to = "MediaTours/", verbose_name = "Фотография")
     slug = models.SlugField(max_length = 100, blank = True)
+    discount = models.ForeignKey(Discount, on_delete = models.CASCADE, related_name="tour_discount", verbose_name = "Скидки", blank = True,null=True)
 
     def __str__(self):
         return self.title
@@ -21,7 +24,7 @@ class TourOrder(models.Model):
     first_name = models.CharField(max_length = 100)
     last_name = models.CharField(max_length = 100)
     email = models.EmailField()
-    phone_number = models.PositiveIntegerField(default=0)
+    phone_number = models.CharField(max_length=35)
     tour = models.ForeignKey(Tour, on_delete=models.CASCADE)
 
     def __str__(self):

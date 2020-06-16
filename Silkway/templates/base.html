@@ -29,6 +29,10 @@
     <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
     <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
     <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css' rel='stylesheet' />
+
   
     <!-- Main Stylesheet File -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
@@ -48,97 +52,34 @@
   <!--/ Form Search Star /-->
   <div class="box-collapse">
     <div class="title-box-d">
-      <h3 class="title-d">Search Property</h3>
+      <h3 class="title-d">Login</h3>
     </div>
     <span class="close-box-collapse right-boxed ion-ios-close"></span>
     <div class="box-collapse-wrap form">
-      <form action="{% url 'index' %}" method="GET" class="form-a">
+      <form action="{% url 'login' %}" class="form-a" method="POST">
+        {% csrf_token %}
         <div class="row">
           <div class="col-md-12 mb-2">
+            {% for message in messages %}
+            <h3> {{message}}  </h3>
+            {% endfor %}
             <div class="form-group">
-              <label for="Type">Keyword</label>
-              <input name="search" type="text" class="form-control form-control-lg form-control-a" placeholder="Keyword">
+              <input type="text" class="form-control form-control-lg form-control-a" placeholder="User Name" name = "username">
             </div>
           </div>
-          <div class="col-md-6 mb-2">
+          <div class="col-md-12 mb-2">
             <div class="form-group">
-              <label for="Type">Type</label>
-              <select class="form-control form-control-lg form-control-a" id="Type">
-                <option>All Type</option>
-                <option>For Rent</option>
-                <option>For Sale</option>
-                <option>Open House</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="city">City</label>
-              <select class="form-control form-control-lg form-control-a" id="city">
-                <option>All City</option>
-                <option>Alabama</option>
-                <option>Arizona</option>
-                <option>California</option>
-                <option>Colorado</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="bedrooms">Bedrooms</label>
-              <select class="form-control form-control-lg form-control-a" id="bedrooms">
-                <option>Any</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="garages">Garages</label>
-              <select class="form-control form-control-lg form-control-a" id="garages">
-                <option>Any</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-                <option>04</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="bathrooms">Bathrooms</label>
-              <select class="form-control form-control-lg form-control-a" id="bathrooms">
-                <option>Any</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="price">Min Price</label>
-              <select class="form-control form-control-lg form-control-a" id="price">
-                <option>Unlimite</option>
-                <option>$50,000</option>
-                <option>$100,000</option>
-                <option>$150,000</option>
-                <option>$200,000</option>
-              </select>
+              <input type="password" class="form-control form-control-lg form-control-a" placeholder="Password" name="password">
             </div>
           </div>
           <div class="col-md-12">
-            <button type="submit" class="btn btn-b">Search Property</button>
+            <button type="submit" class="btn btn-b">LogIn</button>
           </div>
         </div>
       </form>
     </div>
   </div>
-  <!--/ Form Search End /-->
 
-  <!--/ Nav Star /-->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
     <div class="container">
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
@@ -155,108 +96,84 @@
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'index' %}">Home</a>
+            <a class="nav-link" href="{% url 'about' %}">О Компании</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
+            <a class="nav-link" href="{% url 'country_list' %}">Страны</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'country_list' %}">Список стран</a>
+            <a class="nav-link" href="{% url 'tour_list' %}">Туры</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'blog_view' %}">Новости</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Pages
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="property-single.html">Property Single</a>
-              <a class="dropdown-item" href="blog-single.html">Blog Single</a>
-              <a class="dropdown-item" href="{% url 'tour_list' %}">Список туров</a>
-            </div>
+            <a class="nav-link" href="{% url 'car_list' %}">Транспорт</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
           </li>
         </ul>
       </div>
+      {% if user.is_authenticated %}
+      <a href="{% url 'user_profile'  user.profile.id  %}" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" >
+        Личный кабинет
+      </a>
+      <a href="{% url 'logout' %}" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" >
+        Выйти
+      </a>
+      {% else %}
       <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse"
         data-target="#navbarTogglerDemo01" aria-expanded="false">
-        <span class="fa fa-search" aria-hidden="true"></span>
+        Войти
       </button>
+      {% endif %}
     </div>
   </nav>
   <!--/ Nav End /-->
 
   <!--/ Carousel Star /-->
-  <div class="intro intro-carousel">
-    <div id="carousel" class="owl-carousel owl-theme">
-      <div class="carousel-item-a intro-item bg-image" style="background-image: url(img/slide-1.jpg)">
+  <div class="intro intro-carousel" style="position: relative;">
+    <div class="container" style="position: absolute; z-index: 2; margin-left: auto; margin-right: auto; left: 0; right: 0; top: 36%;">
+      <form action="{% url 'search' %}" method="GET" class="form-a">
+        <div class="row">
+          <div class="col-md-12 mb-2">
+            <div class="form-group">
+              <input name="S" type="text" class="form-control form-control-lg form-control-a" placeholder="Страна, регион, отель">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-b">Search Property</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div id="carousel" class="owl-carousel owl-theme" class="box-collapse-open" style="position: relative;">
+      <div class="carousel-item-a intro-item bg-image" style="background-image: url({% static 'img/slide1.jpg' %})">
         <div class="overlay overlay-a"></div>
         <div class="intro-content display-table">
           <div class="table-cell">
             <div class="container">
               <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345</p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">204 </span> Mount
-                      <br> Olive Road Two</h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ 12.000</span></a>
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="carousel-item-a intro-item bg-image" style="background-image: url(img/slide-2.jpg)">
+      <div class="carousel-item-a intro-item bg-image" style="background-image: url({% static 'img/slide2.jpg' %})">
         <div class="overlay overlay-a"></div>
         <div class="intro-content display-table">
           <div class="table-cell">
             <div class="container">
               <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345</p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">204 </span> Rino
-                      <br> Venda Road Five</h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ 12.000</span></a>
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="carousel-item-a intro-item bg-image" style="background-image: url(img/slide-3.jpg)">
+      <div class="carousel-item-a intro-item bg-image" style="background-image: url({% static 'img/slide3.jpg' %})">
         <div class="overlay overlay-a"></div>
         <div class="intro-content display-table">
           <div class="table-cell">
             <div class="container">
               <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345</p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">204 </span> Alira
-                      <br> Roan Road One</h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ 12.000</span></a>
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -264,99 +181,6 @@
       </div>
     </div>
   </div>
-  <!--/ Carousel end /-->
-
-  <!--/ Services Star /-->
-  <section class="section-services section-t8">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="title-wrap d-flex justify-content-between">
-            <div class="title-box">
-              <h2 class="title-a">Наши услуги</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card-box-c foo">
-            <div class="card-header-c d-flex">
-              <div class="card-box-ico">
-                <span class="fa fa-gamepad"></span>
-              </div>
-              <div class="card-title-c align-self-center">
-                <h2 class="title-c">Транспорт</h2>
-              </div>
-            </div>
-            <div class="card-body-c">
-              <p class="content-c">
-                Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa,
-                convallis a pellentesque
-                nec, egestas non nisi.
-              </p>
-            </div>
-            <div class="card-footer-c">
-              <a href="{% url 'car_list' %}" class="link-c link-icon">Подробнее
-                <span class="ion-ios-arrow-forward"></span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card-box-c foo">
-            <div class="card-header-c d-flex">
-              <div class="card-box-ico">
-                <span class="fa fa-usd"></span>
-              </div>
-              <div class="card-title-c align-self-center">
-                <h2 class="title-c">Авиабилеты</h2>
-              </div>
-            </div>
-            <div class="card-body-c">
-              <p class="content-c">
-                Nulla porttitor accumsan tincidunt. Curabitur aliquet quam id dui posuere blandit. Mauris blandit
-                aliquet elit, eget tincidunt
-                nibh pulvinar a.
-              </p>
-            </div>
-            <div class="card-footer-c">
-              <a href="{% url 'flights_list' %}" class="link-c link-icon">Подробнее
-                <span class="ion-ios-arrow-forward"></span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card-box-c foo">
-            <div class="card-header-c d-flex">
-              <div class="card-box-ico">
-                <span class="fa fa-home"></span>
-              </div>
-              <div class="card-title-c align-self-center">
-                <h2 class="title-c">Туры</h2>
-              </div>
-            </div>
-            <div class="card-body-c">
-              <p class="content-c">
-                Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa,
-                convallis a pellentesque
-                nec, egestas non nisi.
-              </p>
-            </div>
-            <div class="card-footer-c">
-              <a href="{% url 'tour_list' %}" class="link-c link-icon">Подробнее
-                <span class="ion-ios-arrow-forward"></span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--/ Services End /-->
-
-  <!--/ Property Star /-->
 
   <section class="section-property section-t8">
     <div class="container">
@@ -364,36 +188,36 @@
         <div class="col-md-12">
           <div class="title-wrap d-flex justify-content-between">
             <div class="title-box">
-              <h2 class="title-a">Популярные Страны</h2>
+              <h2 class="title-a">Список Скидок</h2>
             </div>
             <div class="title-link">
-              <a href="{% url 'country_list' %}">Все страны
+              <a href="{% url 'country_list' %}">Полный список
                 <span class="ion-ios-arrow-forward"></span>
               </a>
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-      {% for country in countries %}
-        <div class="col-md-4">
+      <div id="property-carousel" class="owl-carousel owl-theme">
+        {% for obj in discounts %}
+        {% for hotel in obj.hotel_discount.all %}
+        <div class="carousel-item-b">
           <div class="card-box-a card-shadow">
             <div class="img-box-a">
-              <img src="{{ country.img.url }}" alt="" class="img-a img-fluid">
+              <img src="{{ hotel.img.url }}" alt="" class="img-a img-fluid">
             </div>
             <div class="card-overlay">
               <div class="card-overlay-a-content">
                 <div class="card-header-a">
                   <h2 class="card-title-a">
-                    <a href="#">
-                      <br /> {{ country.title }} </a>
+                    <a href="{{ hotel.get_absolute_url }}">{{ hotel.title }} </a>
                   </h2>
                 </div>
                 <div class="card-body-a">
                   <div class="price-box d-flex">
                     <span class="price-a">rent | $ 12.000</span>
                   </div>
-                  <a href="{{ country.get_absolute_url }}" class="link-a">Click here to view
+                  <a href="{{ hotel.get_absolute_url }}" class="link-a">Click here to view
                     <span class="ion-ios-arrow-forward"></span>
                   </a>
                 </div>
@@ -424,13 +248,11 @@
           </div>
         </div>
         {% endfor %}
+        {% endfor %}
       </div>
     </div>
   </section>
 
-  <!--/ Property End /-->
-
-  <!--/ Agents Star /-->
   <section class="section-agents section-t8">
     <div class="container">
       <div class="row">
@@ -515,78 +337,41 @@
   <!--/ Agents End /-->
 
   <!--/ News Star /-->
-  <section class="section-agents section-t8">
+  <section class="section-news section-t8">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="title-wrap d-flex justify-content-between">
             <div class="title-box">
-              <h2 class="title-a">Новости</h2>
+              <h2 class="title-a">Наши партнеры</h2>
             </div>
             <div class="title-link">
-              <a href="{% url 'blog_view' %}">Список Новостей
+              <a href="{% url 'partners_list' %}">Список партнеров
                 <span class="ion-ios-arrow-forward"></span>
               </a>
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        {% for blog in blogs %}
-        <div class="col-md-4">
-          <div class="card-box-d">
-            <div class="card-img-d">
-              <img src="{{ blog.img.url }}" alt="" class="img-d img-fluid">
+      <div id="new-carousel" class="owl-carousel owl-theme">
+        {% for partner in partners %}
+        <div class="carousel-item-c">
+          <div class="card-box-b card-shadow news-box">
+            <div class="img-box-b">
+              <img src="{{ partner.img.url }}" alt="" class="img-b img-fluid">
             </div>
-            <div class="card-overlay card-overlay-hover">
-              <div class="card-header-d">
-                <div class="card-title-d align-self-center">
-                  <h3 class="title-d">
-                    <a href="{{ blog.get_absolute_url }}" class="link-two">{{ blog.title }}</a>
-                  </h3>
-                </div>
-              </div>
-              <div class="card-body-d">
-                <p class="content-d color-text-a">
-                  {{ blog.text|truncatewords:2 }}
-                </p>
-              </div>
-              <div class="card-footer-d">
-                <div class="socials-footer d-flex justify-content-center">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-instagram" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-dribbble" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+            <div class="card-overlay">
+              <div class="card-header-b">
+                <!-- <div class="card-title-b">
+                  <h2 class="title-2">
+                    {{ partner.name }}
+                  </h2>
+                </div> -->
               </div>
             </div>
           </div>
         </div>
         {% endfor %}
-        
       </div>
     </div>
   </section>
@@ -662,9 +447,9 @@
       </div>
     </div>
   </section>
-  <!--/ Testimonials End /-->
 
-  <!--/ footer Star /-->
+
+
   <section class="section-footer">
     <div class="container">
       <div class="row">
@@ -828,3 +613,9 @@
 
 </body>
 </html>
+
+
+
+
+
+

@@ -19,12 +19,18 @@ from django.conf import settings
 from django.conf.urls.static import static 
 
 urlpatterns = [
+    path('jet/', include('jet.urls')),
     path('admin/', admin.site.urls),
     path('blogs/', include('apps.blog.urls')),
     path('flights/', include('apps.flights.urls')),
     path('tours/', include('apps.Tours.urls')),
     path('transports/', include('apps.transport.urls')),
     path('countries/', include('apps.hotels.urls')),
+    path('about/', include('apps.about.urls')),
+    path('discount/', include('apps.discount.urls')),
+    path('partners/', include('apps.partners.urls')),
+    path('contacts/', include('apps.contacts.urls')),
+    path('user/', include('apps.users.urls')),
     path('', include('apps.main.urls')),
 ]
 
