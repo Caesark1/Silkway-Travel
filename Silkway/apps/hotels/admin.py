@@ -1,7 +1,14 @@
 from django.contrib import admin
 from .models import Country, Region, Hotel, HotelOrder, HotelShot, HotelService, HotelRoom
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from django import forms
 
+class HotelAdminForm(forms.ModelForm):
+    text = forms.CharField(label="Описание",widget=CKEditorUploadingWidget())
+    class Meta:
+        model = Hotel
+        fields = '__all__'
 
 
 
@@ -25,6 +32,7 @@ class HotelRooms(admin.TabularInline):
 class HotelAdmin(admin.ModelAdmin):
     inlines = [HotelServices, HotelRooms]
     list_display = ("title", "region")
+    form = HotelAdminForm
 
     class Meta:
         model = Hotel
